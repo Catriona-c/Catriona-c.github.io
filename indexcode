@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CatrionaCoppez - Personal Blog</title>
+    <style>
+        /* Your CSS styles here */
+        /* This is just an example, adjust as per your design */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Neutral cream */
+            color: #333; /* Brownish text */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff; /* White background */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+        h1, h2 {
+            color: #555; /* Darker brownish heading */
+        }
+        .content {
+            margin-top: 20px;
+        }
+        .editable {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Catriona Coppez</h1>
+            <p>Personal Blog</p>
+        </header>
+        
+        <section class="content">
+            <article id="about-me" class="editable">
+                <h2>About Me</h2>
+                <div contenteditable="true">
+                    <!-- Your about me content here -->
+                    Replace this text with your about me content.
+                </div>
+            </article>
+            
+            <article id="testimony" class="editable">
+                <h2>Testimony</h2>
+                <div contenteditable="true">
+                    <!-- My life has been filled  -->
+                    Replace this text with your testimony.
+                </div>
+            </article>
+        </section>
+        
+        <footer>
+            <p>&copy; 2024 Your Name. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <script>
+        // JavaScript for saving and loading editable content
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved content from localStorage
+            loadContent('about-me');
+            loadContent('testimony');
+
+            // Save content on blur (when user clicks away from editable area)
+            document.querySelectorAll('.editable [contenteditable="true"]').forEach(el => {
+                el.addEventListener('blur', function() {
+                    const id = this.closest('article').id;
+                    saveContent(id);
+                });
+            });
+        });
+
+        // Function to save edited content to localStorage
+        function saveContent(id) {
+            const content = document.getElementById(id).querySelector('[contenteditable="true"]').innerHTML;
+            localStorage.setItem(id, content);
+        }
+
+        // Function to load saved content from localStorage
+        function loadContent(id) {
+            const savedContent = localStorage.getItem(id);
+            if (savedContent) {
+                document.getElementById(id).querySelector('[contenteditable="true"]').innerHTML = savedContent;
+            }
+        }
+    </script>
+</body>
+</html>
